@@ -1,14 +1,14 @@
 // Create fireworks
 function createFirework(x, y) {
-    const colors = ['#ff6b9d', '#667eea', '#764ba2', '#f093fb', '#ffd700'];
+    const colors = ['#ff6b9d', '#667eea', '#764ba2', '#f093fb', '#ffd700', '#ff4d7d'];
     const fireworksContainer = document.querySelector('.fireworks-container');
     
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < 35; i++) {
         const firework = document.createElement('div');
         firework.classList.add('firework');
         
-        const angle = (Math.PI * 2 * i) / 30;
-        const velocity = 50 + Math.random() * 50;
+        const angle = (Math.PI * 2 * i) / 35;
+        const velocity = 50 + Math.random() * 60;
         const x_vel = Math.cos(angle) * velocity;
         const y_vel = Math.sin(angle) * velocity;
         
@@ -20,7 +20,7 @@ function createFirework(x, y) {
         
         fireworksContainer.appendChild(firework);
         
-        setTimeout(() => firework.remove(), 1000);
+        setTimeout(() => firework.remove(), 1200);
     }
 }
 
@@ -46,12 +46,12 @@ function createFallingHeart() {
     heart.classList.add('falling-heart');
     heart.innerHTML = ['❤️', '💕', '💖', '💗', '💝', '💓', '💞'][Math.floor(Math.random() * 7)];
     heart.style.left = Math.random() * 100 + '%';
-    heart.style.animationDuration = (Math.random() * 2 + 3) + 's';
+    heart.style.animationDuration = (Math.random() * 2 + 4) + 's';
     heart.style.animationDelay = Math.random() * 2 + 's';
     
     heartsRain.appendChild(heart);
     
-    setTimeout(() => heart.remove(), 7000);
+    setTimeout(() => heart.remove(), 8000);
 }
 
 // Create hearts continuously
@@ -66,7 +66,7 @@ document.querySelectorAll('.nav-btn').forEach(btn => {
                 const sparkle = document.createElement('span');
                 sparkle.innerHTML = '✨';
                 sparkle.style.position = 'absolute';
-                sparkle.style.fontSize = '20px';
+                sparkle.style.fontSize = '22px';
                 sparkle.style.left = (Math.random() * 100) + '%';
                 sparkle.style.top = (Math.random() * 100) + '%';
                 sparkle.style.animation = 'sparkleFloat 1s ease-out forwards';
@@ -90,7 +90,7 @@ style.textContent = `
             opacity: 1;
         }
         100% {
-            transform: translate(${Math.random() * 40 - 20}px, -30px) scale(1);
+            transform: translate(${Math.random() * 40 - 20}px, -35px) scale(1);
             opacity: 0;
         }
     }
@@ -105,12 +105,12 @@ function createConfetti() {
         setTimeout(() => {
             const confetti = document.createElement('div');
             confetti.style.position = 'fixed';
-            confetti.style.width = '10px';
-            confetti.style.height = '10px';
+            confetti.style.width = '12px';
+            confetti.style.height = '12px';
             confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
             confetti.style.left = Math.random() * 100 + '%';
             confetti.style.top = '-20px';
-            confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+            confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
             confetti.style.animation = `confettiFall ${Math.random() * 3 + 2}s linear forwards`;
             confetti.style.zIndex = '999';
             confetti.style.pointerEvents = 'none';
@@ -143,7 +143,7 @@ window.addEventListener('load', () => {
 // Make emojis interactive
 document.querySelectorAll('.celebrate-emoji, .dance').forEach(emoji => {
     emoji.addEventListener('click', function() {
-        this.style.transform = 'scale(2) rotate(360deg)';
+        this.style.transform = 'scale(2.2) rotate(360deg)';
         setTimeout(() => {
             this.style.transform = '';
         }, 500);

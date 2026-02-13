@@ -9,12 +9,12 @@ function createFloatingHeart() {
     heart.classList.add('floating-heart');
     heart.innerHTML = ['❤️', '💕', '💖', '💗', '💝'][Math.floor(Math.random() * 5)];
     heart.style.left = Math.random() * 100 + '%';
-    heart.style.animationDuration = (Math.random() * 4 + 8) + 's';
+    heart.style.animationDuration = (Math.random() * 4 + 10) + 's';
     heart.style.animationDelay = Math.random() * 5 + 's';
     
     heartsBackground.appendChild(heart);
     
-    setTimeout(() => heart.remove(), 12000);
+    setTimeout(() => heart.remove(), 14000);
 }
 
 // Create hearts continuously

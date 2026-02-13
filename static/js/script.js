@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', function() {
         reasonText.style.animation = 'none';
         setTimeout(() => {
             reasonText.textContent = randomReason;
-            reasonText.style.animation = 'fadeIn 0.5s ease';
+            reasonText.style.animation = 'fadeIn 0.6s ease';
         }, 10);
     });
     
@@ -106,20 +106,21 @@ document.addEventListener('DOMContentLoaded', function() {
         const heart = document.createElement('div');
         heart.innerHTML = '❤️';
         heart.style.position = 'fixed';
-        heart.style.fontSize = Math.random() * 20 + 15 + 'px';
+        heart.style.fontSize = Math.random() * 20 + 20 + 'px';
         heart.style.left = Math.random() * 100 + '%';
         heart.style.bottom = '-50px';
-        heart.style.opacity = '0.6';
+        heart.style.opacity = '0.7';
         heart.style.zIndex = '1';
         heart.style.pointerEvents = 'none';
-        heart.style.animation = `float ${Math.random() * 5 + 10}s linear`;
+        heart.style.animation = `float ${Math.random() * 5 + 12}s linear`;
+        heart.style.filter = 'drop-shadow(0 0 8px rgba(255, 107, 157, 0.5))';
         
         document.body.appendChild(heart);
         
         // Remove heart after animation
         setTimeout(() => {
             heart.remove();
-        }, 15000);
+        }, 17000);
     }
     
     // Add some initial sparkle to the open button
@@ -128,7 +129,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const sparkle = document.createElement('span');
             sparkle.innerHTML = '✨';
             sparkle.style.position = 'absolute';
-            sparkle.style.fontSize = '20px';
+            sparkle.style.fontSize = '22px';
             sparkle.style.animation = 'sparkleFloat 1s ease-out forwards';
             sparkle.style.left = Math.random() * 100 + '%';
             sparkle.style.top = '50%';
@@ -165,7 +166,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const photoCards = document.querySelectorAll('.photo-card');
     photoCards.forEach(card => {
         card.addEventListener('click', function() {
-            this.style.transform = 'scale(1.1) rotate(5deg)';
+            this.style.transform = 'scale(1.15) rotate(5deg)';
             setTimeout(() => {
                 this.style.transform = '';
             }, 300);
@@ -175,10 +176,10 @@ document.addEventListener('DOMContentLoaded', function() {
     // Add a special message on hover
     const letterElement = document.querySelector('.letter');
     letterElement.addEventListener('mouseenter', function() {
-        this.style.boxShadow = '0 10px 40px rgba(255, 107, 157, 0.4)';
+        this.style.boxShadow = '0 12px 50px rgba(255, 107, 157, 0.5)';
     });
     
     letterElement.addEventListener('mouseleave', function() {
-        this.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.1)';
+        this.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.15)';
     });
 });

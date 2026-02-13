@@ -5,8 +5,8 @@ const subtitle = document.getElementById('subtitle');
 const teddyBear = document.getElementById('teddyBear');
 const modalOverlay = document.getElementById('modalOverlay');
 const modalCloseBtn = document.getElementById('modalCloseBtn');
+const buttonsContainer = document.querySelector('.buttons-container');
 let noClickCount = 0;
-let isMoving = false;
 
 // Messages to show when hovering/clicking No
 const noMessages = [
@@ -50,7 +50,7 @@ function createHeart() {
     heart.innerHTML = ['❤️', '💕', '💖', '💗', '💝'][Math.floor(Math.random() * 5)];
     heart.style.left = Math.random() * 100 + '%';
     heart.style.animationDuration = (Math.random() * 3 + 5) + 's';
-    heart.style.fontSize = (Math.random() * 20 + 20) + 'px';
+    heart.style.fontSize = (Math.random() * 20 + 25) + 'px';
     heartsContainer.appendChild(heart);
     
     setTimeout(() => heart.remove(), 8000);
@@ -82,40 +82,45 @@ for (let i = 0; i < 10; i++) {
     createFloatingEmoji();
 }
 
-// Move No button to random position with smooth animation
-function moveNoButton() {
-    if (isMoving) return;
-    isMoving = true;
+// FIXED: Move No button away from cursor
+function moveNoButton(event) {
+    const containerRect = buttonsContainer.getBoundingClientRect();
+    const noBtnRect = noBtn.getBoundingClientRect();
     
-    const container = document.querySelector('.buttons-container');
-    const containerRect = container.getBoundingClientRect();
-    const btnRect = noBtn.getBoundingClientRect();
+    // Get mouse position relative to container
+    let mouseX = event.clientX - containerRect.left;
+    let mouseY = event.clientY - containerRect.top;
     
-    // Calculate safe boundaries
-    const maxX = containerRect.width - btnRect.width;
-    const maxY = containerRect.height - btnRect.height;
+    // Calculate safe zone (area around mouse to avoid)
+    const safeZone = 150;
     
-    // Get current position
-    const currentLeft = parseFloat(noBtn.style.left) || containerRect.width / 2 - btnRect.width / 2;
-    const currentTop = parseFloat(noBtn.style.top) || 0;
+    // Generate random position away from mouse
+    let newX, newY;
+    let attempts = 0;
+    const maxAttempts = 10;
     
-    // Generate new position (away from current position)
-    let newLeft, newTop;
     do {
-        newLeft = Math.random() * maxX;
-        newTop = Math.random() * maxY;
-    } while (
-        Math.abs(newLeft - currentLeft) < 100 || 
-        Math.abs(newTop - currentTop) < 50
-    );
+        newX = Math.random() * (containerRect.width - noBtnRect.width);
+        newY = Math.random() * (containerRect.height - noBtnRect.height);
+        
+        // Calculate distance from mouse
+        const distX = Math.abs(newX + noBtnRect.width / 2 - mouseX);
+        const distY = Math.abs(newY + noBtnRect.height / 2 - mouseY);
+        const distance = Math.sqrt(distX * distX + distY * distY);
+        
+        attempts++;
+        
+        // If we found a position far enough from mouse, use it
+        if (distance > safeZone) {
+            break;
+        }
+    } while (attempts < maxAttempts);
     
-    // Apply smooth transition
-    noBtn.style.left = newLeft + 'px';
-    noBtn.style.top = newTop + 'px';
-    
-    setTimeout(() => {
-        isMoving = false;
-    }, 200);
+    // Apply position with smooth transition
+    noBtn.style.position = 'absolute';
+    noBtn.style.left = newX + 'px';
+    noBtn.style.top = newY + 'px';
+    noBtn.style.transition = 'all 0.3s ease';
 }
 
 // Update No button text
@@ -149,9 +154,9 @@ function closeModal() {
     document.body.style.overflow = '';
 }
 
-// No button hover event
-noBtn.addEventListener('mouseenter', function() {
-    moveNoButton();
+// No button mouse enter event
+noBtn.addEventListener('mouseenter', function(e) {
+    moveNoButton(e);
     noClickCount++;
     updateNoButtonText();
     
@@ -193,7 +198,7 @@ noBtn.addEventListener('click', function(e) {
     setTimeout(() => this.classList.remove('shake'), 400);
     
     // Move button
-    moveNoButton();
+    moveNoButton(e);
     noClickCount++;
     updateNoButtonText();
     
@@ -243,19 +248,19 @@ yesBtn.addEventListener('click', function() {
     // Change subtitle
     subtitle.textContent = "Yay! I knew you'd say yes! 🎉💕";
     subtitle.style.color = '#ff6b9d';
-    subtitle.style.fontSize = '28px';
+    subtitle.style.fontSize = '30px';
     subtitle.style.fontWeight = '700';
     
     // Make teddy super excited
     teddyBear.classList.add('excited');
-    teddyBear.style.fontSize = '150px';
+    teddyBear.style.fontSize = '160px';
     
     // Hide No button
     noBtn.style.display = 'none';
     
     // Make Yes button bigger
-    this.style.padding = '30px 70px';
-    this.style.fontSize = '36px';
+    this.style.padding = '35px 80px';
+    this.style.fontSize = '40px';
     this.textContent = '💕 YES! 💕';
     
     // Create heart explosion
@@ -303,9 +308,9 @@ teddyBear.addEventListener('click', function() {
 // Add sparkle to Yes button periodically
 setInterval(() => {
     if (yesBtn.style.display !== 'none') {
-        yesBtn.style.boxShadow = '0 10px 40px rgba(255, 107, 157, 0.9)';
+        yesBtn.style.boxShadow = '0 12px 50px rgba(255, 107, 157, 0.9)';
         setTimeout(() => {
-            yesBtn.style.boxShadow = '0 10px 30px rgba(255, 107, 157, 0.5)';
+            yesBtn.style.boxShadow = '0 12px 35px rgba(255, 107, 157, 0.6)';
         }, 300);
     }
 }, 2000);

@@ -14,12 +14,13 @@ function createParticle() {
     const particle = document.createElement('div');
     particle.innerHTML = ['❤️', '💕', '✨', '💖', '🌟'][Math.floor(Math.random() * 5)];
     particle.style.position = 'absolute';
-    particle.style.fontSize = (Math.random() * 25 + 15) + 'px';
+    particle.style.fontSize = (Math.random() * 25 + 20) + 'px';
     particle.style.left = Math.random() * 100 + '%';
     particle.style.top = Math.random() * 100 + '%';
-    particle.style.opacity = '0.5';
-    particle.style.animation = `float ${Math.random() * 10 + 10}s ease-in-out infinite`;
+    particle.style.opacity = '0.6';
+    particle.style.animation = `float ${Math.random() * 10 + 12}s ease-in-out infinite`;
     particle.style.pointerEvents = 'none';
+    particle.style.filter = 'drop-shadow(0 3px 8px rgba(255, 107, 157, 0.4))';
     
     animatedBg.appendChild(particle);
     
@@ -36,10 +37,10 @@ style.textContent = `
             transform: translate(0, 0) rotate(0deg);
         }
         33% {
-            transform: translate(30px, -30px) rotate(120deg);
+            transform: translate(35px, -35px) rotate(120deg);
         }
         66% {
-            transform: translate(-30px, 30px) rotate(240deg);
+            transform: translate(-35px, 35px) rotate(240deg);
         }
     }
 `;
@@ -70,7 +71,7 @@ heartButton.addEventListener('click', function() {
     clickCount++;
     
     // Animate heart
-    this.style.transform = 'scale(1.5)';
+    this.style.transform = 'scale(1.6)';
     setTimeout(() => {
         this.style.transform = '';
     }, 300);
@@ -81,7 +82,7 @@ heartButton.addEventListener('click', function() {
     setTimeout(() => {
         reasonText.textContent = randomReason;
         reasonCounter.textContent = `Reason ${clickCount} of ${reasons.length}`;
-        reasonCard.style.animation = 'cardAppear 0.5s ease';
+        reasonCard.style.animation = 'cardAppear 0.6s ease';
     }, 10);
     
     // Create particle burst
@@ -92,7 +93,7 @@ heartButton.addEventListener('click', function() {
 
 // Reveal all reasons
 revealBtn.addEventListener('click', function() {
-    if (reasonsGrid.style.display === 'none') {
+    if (reasonsGrid.style.display === 'none' || reasonsGrid.style.display === '') {
         reasonsGrid.style.display = 'grid';
         this.textContent = 'Hide All Reasons 💝';
         
@@ -111,7 +112,7 @@ revealBtn.addEventListener('click', function() {
 // Add hover effect to reason items
 document.querySelectorAll('.reason-item').forEach(item => {
     item.addEventListener('mouseenter', function() {
-        this.style.transform = 'scale(1.05) translateY(-5px)';
+        this.style.transform = 'scale(1.05) translateY(-8px)';
     });
     
     item.addEventListener('mouseleave', function() {
