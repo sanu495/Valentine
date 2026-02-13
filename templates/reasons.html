@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Why I Love You ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/reasons.css">
+</head>
+<body>
+    <div class="animated-bg"></div>
+    
+    <div class="container">
+        <h1 class="page-title">Reasons Why I Love You ❤️</h1>
+        <p class="page-subtitle">Click the heart to reveal another reason 💕</p>
+        
+        <div class="reason-display">
+            <div class="heart-button" id="heartButton">
+                <span class="heart-icon">❤️</span>
+            </div>
+            
+            <div class="reason-card" id="reasonCard">
+                <p class="reason-text" id="reasonText">Click the heart to see why you're so special ✨</p>
+                <p class="reason-counter" id="reasonCounter"></p>
+            </div>
+        </div>
+        
+        <div class="all-reasons-section">
+            <h2>All My Reasons (Click to Reveal All)</h2>
+            <button class="reveal-btn" id="revealBtn">Show All Reasons 💝</button>
+            
+            <div class="reasons-grid" id="reasonsGrid" style="display: none;">
+                {% for reason in reasons %}
+                <div class="reason-item">
+                    <span class="reason-number">{{ loop.index }}</span>
+                    <p class="reason-item-text">{{ reason }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        
+        <div class="love-message">
+            <p>These are just a few of the countless reasons why I love you. Every day with you gives me a new reason to fall more deeply in love. You are my everything. ❤️</p>
+        </div>
+        
+        <div class="navigation-bottom">
+            <a href="/memories" class="back-btn">← Memories</a>
+            <a href="/celebration" class="home-btn">🏠 Home</a>
+        </div>
+    </div>
+    
+    <script>
+        const reasons = {{ reasons | tojson }};
+    </script>
+    <script src="/static/js/reasons.js"></script>
+</body>
+</html>

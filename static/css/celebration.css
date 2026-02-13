@@ -1,0 +1,335 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Fireworks Container */
+.fireworks-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.firework {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    animation: explode 1s ease-out forwards;
+}
+
+@keyframes explode {
+    0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(var(--x), var(--y)) scale(0);
+        opacity: 0;
+    }
+}
+
+/* Hearts Rain */
+.hearts-rain {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.falling-heart {
+    position: absolute;
+    font-size: 30px;
+    animation: fall 5s linear infinite;
+    opacity: 0.8;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(100vh) rotate(360deg);
+    }
+}
+
+/* Container */
+.container {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 50px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 30px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    max-width: 800px;
+    width: 90%;
+    animation: scaleIn 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes scaleIn {
+    from {
+        transform: scale(0) rotate(-180deg);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+    }
+}
+
+/* Celebration Title */
+.celebration-title {
+    font-family: 'Pacifico', cursive;
+    font-size: 72px;
+    color: #ff6b9d;
+    margin-bottom: 30px;
+    animation: bounce 1s ease-in-out infinite;
+    text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+/* Emoji Celebration */
+.emoji-celebration {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin: 30px 0;
+}
+
+.celebrate-emoji {
+    font-size: 80px;
+    display: inline-block;
+    animation: rotate 2s ease-in-out infinite;
+}
+
+.celebrate-emoji:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.celebrate-emoji:nth-child(2) {
+    animation-delay: 0.3s;
+    animation-name: heartbeat;
+}
+
+.celebrate-emoji:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+@keyframes rotate {
+    0%, 100% {
+        transform: rotate(-10deg) scale(1);
+    }
+    50% {
+        transform: rotate(10deg) scale(1.2);
+    }
+}
+
+@keyframes heartbeat {
+    0%, 100% {
+        transform: scale(1);
+    }
+    25% {
+        transform: scale(1.3);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    75% {
+        transform: scale(1.3);
+    }
+}
+
+/* Message */
+.message {
+    font-family: 'Pacifico', cursive;
+    font-size: 48px;
+    color: #667eea;
+    margin: 20px 0;
+    animation: colorChange 3s ease-in-out infinite;
+}
+
+@keyframes colorChange {
+    0%, 100% {
+        color: #667eea;
+    }
+    33% {
+        color: #ff6b9d;
+    }
+    66% {
+        color: #764ba2;
+    }
+}
+
+.subtitle {
+    font-size: 24px;
+    color: #6c5b7b;
+    margin: 20px 0 40px;
+    font-style: italic;
+}
+
+/* Dancing Emojis */
+.dancing-emojis {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin: 40px 0;
+}
+
+.dance {
+    font-size: 50px;
+    display: inline-block;
+    animation: dance 0.6s ease-in-out infinite;
+}
+
+.dance:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.dance:nth-child(2) {
+    animation-delay: 0.15s;
+}
+
+.dance:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.dance:nth-child(4) {
+    animation-delay: 0.45s;
+}
+
+@keyframes dance {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
+    }
+    25% {
+        transform: translateY(-15px) rotate(-10deg);
+    }
+    75% {
+        transform: translateY(-15px) rotate(10deg);
+    }
+}
+
+/* Navigation */
+.navigation {
+    margin-top: 50px;
+}
+
+.navigation h3 {
+    font-family: 'Pacifico', cursive;
+    font-size: 32px;
+    color: #ff6b9d;
+    margin-bottom: 30px;
+}
+
+.nav-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.nav-btn {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: linear-gradient(135deg, #ff6b9d 0%, #c06c84 100%);
+    color: white;
+    text-decoration: none;
+    padding: 20px 30px;
+    border-radius: 50px;
+    box-shadow: 0 5px 20px rgba(255, 107, 157, 0.4);
+    transition: all 0.3s ease;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.nav-btn:hover {
+    transform: translateX(10px) scale(1.05);
+    box-shadow: 0 8px 30px rgba(255, 107, 157, 0.6);
+}
+
+.nav-btn .icon {
+    font-size: 32px;
+}
+
+.nav-btn .text {
+    flex: 1;
+    text-align: left;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .celebration-title {
+        font-size: 56px;
+    }
+    
+    .celebrate-emoji {
+        font-size: 60px;
+    }
+    
+    .message {
+        font-size: 36px;
+    }
+    
+    .subtitle {
+        font-size: 20px;
+    }
+    
+    .dance {
+        font-size: 40px;
+    }
+    
+    .nav-btn {
+        font-size: 18px;
+        padding: 15px 25px;
+    }
+}
+
+@media (max-width: 480px) {
+    .celebration-title {
+        font-size: 48px;
+    }
+    
+    .celebrate-emoji {
+        font-size: 50px;
+    }
+    
+    .message {
+        font-size: 28px;
+    }
+    
+    .emoji-celebration {
+        gap: 15px;
+    }
+    
+    .dancing-emojis {
+        gap: 10px;
+    }
+}

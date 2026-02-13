@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be My Valentine? 💕</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/question.css">
+</head>
+<body>
+    <div class="hearts-container"></div>
+    <div class="emojis-container"></div>
+    
+    <!-- Don't Touch Me Modal -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-content">
+            <div class="modal-emoji">🙅‍♀️</div>
+            <h2 class="modal-title">Don't Touch Me!</h2>
+            <p class="modal-message">I told you I'd run away! 😤<br>Just click YES already! 💕</p>
+            <button class="modal-close-btn" id="modalCloseBtn">Okay, I'll Click YES 💖</button>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="teddy-bear" id="teddyBear">🧸</div>
+        
+        <h1 class="question">Will You Be My Valentine? 💝</h1>
+        
+        <div class="bunny-container">
+            <span class="bunny">🐰</span>
+            <span class="bunny">🐰</span>
+        </div>
+        
+        <div class="buttons-container">
+            <button class="yes-btn" id="yesBtn">Yes! 💕</button>
+            <button class="no-btn" id="noBtn">No</button>
+        </div>
+        
+        <p class="subtitle" id="subtitle">Please say yes... 🥺</p>
+    </div>
+
+    <script src="/static/js/question.js"></script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Love Letter 💌</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;600;700&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/love-letter.css">
+</head>
+<body>
+    <div class="hearts-background"></div>
+    
+    <div class="container">
+        <div class="envelope-wrapper" id="envelopeWrapper">
+            <div class="envelope" id="envelope">
+                <div class="envelope-top"></div>
+                <div class="envelope-bottom"></div>
+                <div class="letter" id="letter">
+                    <div class="letter-header">
+                        <h1>💕 To My Dearest Love 💕</h1>
+                        <p class="date">Valentine's Day 2026</p>
+                    </div>
+                    
+                    <div class="letter-body">
+                        <p>My Beautiful Valentine,</p>
+                        
+                        <p>As I sit here writing this, my heart is overflowing with love for you. Every moment we've shared together has been nothing short of magical, and I find myself falling deeper in love with you each and every day.</p>
+                        
+                        <p>Your smile lights up my world in ways I never thought possible. When I'm with you, everything feels right, and the world seems to fade away, leaving just the two of us in our own perfect bubble of happiness.</p>
+                        
+                        <p>Thank you for being my partner, my best friend, and my soulmate. Thank you for the laughter we share, the adventures we've had, and the memories we continue to create together.</p>
+                        
+                        <p>You make me want to be a better person every single day. Your kindness, your strength, and your beautiful spirit inspire me in ways you'll never know.</p>
+                        
+                        <div class="days-counter">
+                            <p class="counter-label">We've been together for</p>
+                            <p class="counter-number">{{ days_together }}</p>
+                            <p class="counter-label">beautiful days... and counting! 💖</p>
+                        </div>
+                        
+                        <p>I promise to always cherish you, support you, and love you with all my heart. You are my today and all of my tomorrows.</p>
+                        
+                        <p>Happy Valentine's Day, my love. Here's to forever and always.</p>
+                        
+                        <div class="signature">
+                            <p>All my love,</p>
+                            <p class="signature-name">Forever Yours ❤️</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <button class="open-btn" id="openBtn">Open Letter 💌</button>
+        </div>
+        
+        <div class="navigation-bottom">
+            <a href="/celebration" class="back-btn">← Back</a>
+            <a href="/memories" class="next-btn">Next: Memories →</a>
+        </div>
+    </div>
+    
+    <script src="/static/js/love-letter.js"></script>
+</body>
+</html>
