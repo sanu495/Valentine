@@ -10,20 +10,20 @@ let noClickCount = 0;
 
 // Messages to show when hovering/clicking No
 const noMessages = [
-    "Are you sure? 🥺",
-    "Please reconsider! 💔",
+    "Kundiya pichi Poduva?😤",
+    "Olunga yes sollu amni kunchi! 💔",
     "But why? 😢",
-    "You're breaking my heart! 💔",
+    "Nee my manasa odachiya! 💔",
     "Don't be like that! 🥺",
     "Pretty please? 🙏",
     "I'll be so sad... 😭",
-    "The Yes button is right there! 👉",
+    "Kundi yes button ahh thodu! 👉",
     "Don't make the teddy cry! 🧸",
     "The bunnies are sad now... 🐰😢",
     "Just say YES! It's easier! 😊",
     "Come on! You know you want to! 💕",
     "One more chance? 🥹",
-    "You're making this harder! 😤",
+    "You're making this harder!🥺",
     "I won't give up! 💪💕"
 ];
 
@@ -42,7 +42,7 @@ const noButtonTexts = [
     "Please YES! 🥺"
 ];
 
-// Create floating hearts
+// Create floating hearts only
 function createHeart() {
     const heartsContainer = document.querySelector('.hearts-container');
     const heart = document.createElement('div');
@@ -56,36 +56,14 @@ function createHeart() {
     setTimeout(() => heart.remove(), 8000);
 }
 
-// Create floating emojis (teddy bears and bunnies)
-function createFloatingEmoji() {
-    const emojisContainer = document.querySelector('.emojis-container');
-    const emoji = document.createElement('div');
-    emoji.classList.add('floating-emoji');
-    emoji.innerHTML = ['🧸', '🐰', '💐', '🌹', '🎀'][Math.floor(Math.random() * 5)];
-    emoji.style.left = Math.random() * 100 + '%';
-    emoji.style.top = Math.random() * 100 + '%';
-    emoji.style.animationDelay = Math.random() * 5 + 's';
-    emojisContainer.appendChild(emoji);
-    
-    // Limit number of floating emojis
-    if (emojisContainer.children.length > 15) {
-        emojisContainer.removeChild(emojisContainer.firstChild);
-    }
-}
-
-// Start creating hearts and emojis
+// Start creating hearts
 setInterval(createHeart, 300);
-setInterval(createFloatingEmoji, 2000);
 
-// Initial emojis
-for (let i = 0; i < 10; i++) {
-    createFloatingEmoji();
-}
-
-// FIXED: Move No button away from cursor
+// FIXED: Move No button away from cursor - only allow hiding under Yes button after many attempts
 function moveNoButton(event) {
     const containerRect = buttonsContainer.getBoundingClientRect();
     const noBtnRect = noBtn.getBoundingClientRect();
+    const yesBtnRect = yesBtn.getBoundingClientRect();
     
     // Get mouse position relative to container
     let mouseX = event.clientX - containerRect.left;
@@ -94,10 +72,17 @@ function moveNoButton(event) {
     // Calculate safe zone (area around mouse to avoid)
     const safeZone = 150;
     
+    // Calculate Yes button position relative to container
+    const yesBtnX = yesBtnRect.left - containerRect.left;
+    const yesBtnY = yesBtnRect.top - containerRect.top;
+    
     // Generate random position away from mouse
     let newX, newY;
     let attempts = 0;
-    const maxAttempts = 10;
+    const maxAttempts = 20;
+    
+    // After 10 clicks, allow the button to hide under Yes button
+    const allowHideUnderYes = noClickCount >= 10;
     
     do {
         newX = Math.random() * (containerRect.width - noBtnRect.width);
@@ -108,19 +93,49 @@ function moveNoButton(event) {
         const distY = Math.abs(newY + noBtnRect.height / 2 - mouseY);
         const distance = Math.sqrt(distX * distX + distY * distY);
         
+        // Calculate distance from Yes button
+        const distFromYesX = Math.abs(newX + noBtnRect.width / 2 - (yesBtnX + yesBtnRect.width / 2));
+        const distFromYesY = Math.abs(newY + noBtnRect.height / 2 - (yesBtnY + yesBtnRect.height / 2));
+        const distanceFromYes = Math.sqrt(distFromYesX * distFromYesX + distFromYesY * distFromYesY);
+        
         attempts++;
         
-        // If we found a position far enough from mouse, use it
-        if (distance > safeZone) {
+        // Check if position is far enough from mouse
+        const farFromMouse = distance > safeZone;
+        
+        // Before 10 clicks, also check if far enough from Yes button
+        // After 10 clicks, allow it to be close to or under Yes button
+        const farFromYes = allowHideUnderYes || distanceFromYes > 100;
+        
+        // If we found a good position, use it
+        if (farFromMouse && farFromYes) {
             break;
         }
-    } while (attempts < maxAttempts);
+        
+        // After max attempts, just use what we have (this allows hiding under Yes button)
+        if (attempts >= maxAttempts && farFromMouse) {
+            break;
+        }
+    } while (attempts < maxAttempts + 5);
     
-    // Apply position with smooth transition
+    // Apply position instantly (no transition)
     noBtn.style.position = 'absolute';
     noBtn.style.left = newX + 'px';
     noBtn.style.top = newY + 'px';
-    noBtn.style.transition = 'all 0.3s ease';
+    
+    // If after 10 clicks and button ends up near Yes button, hide it under Yes button
+    if (allowHideUnderYes) {
+        const finalDistFromYesX = Math.abs(newX + noBtnRect.width / 2 - (yesBtnX + yesBtnRect.width / 2));
+        const finalDistFromYesY = Math.abs(newY + noBtnRect.height / 2 - (yesBtnY + yesBtnRect.height / 2));
+        const finalDistanceFromYes = Math.sqrt(finalDistFromYesX * finalDistFromYesX + finalDistFromYesY * finalDistFromYesY);
+        
+        if (finalDistanceFromYes < 80) {
+            // Position it directly under Yes button
+            noBtn.style.left = yesBtnX + 'px';
+            noBtn.style.top = yesBtnY + 'px';
+            noBtn.style.zIndex = '0';
+        }
+    }
 }
 
 // Update No button text
@@ -156,8 +171,8 @@ function closeModal() {
 
 // No button mouse enter event
 noBtn.addEventListener('mouseenter', function(e) {
-    moveNoButton(e);
     noClickCount++;
+    moveNoButton(e);
     updateNoButtonText();
     
     // Update subtitle with funny message
@@ -198,8 +213,8 @@ noBtn.addEventListener('click', function(e) {
     setTimeout(() => this.classList.remove('shake'), 400);
     
     // Move button
-    moveNoButton(e);
     noClickCount++;
+    moveNoButton(e);
     updateNoButtonText();
     
     // Update subtitle

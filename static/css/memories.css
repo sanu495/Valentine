@@ -113,12 +113,23 @@ body {
 }
 
 .photo-placeholder {
-    font-size: 130px;
-    text-align: center;
-    padding: 50px;
+    width: 100%;
+    height: 350px;
     background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
     border-radius: 5px;
-    filter: drop-shadow(0 3px 10px rgba(0, 0, 0, 0.1));
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.photo-placeholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
 }
 
 .polaroid-text {
@@ -210,8 +221,7 @@ body {
     }
     
     .photo-placeholder {
-        font-size: 90px;
-        padding: 35px;
+        height: 280px;
     }
     
     .quote-text {

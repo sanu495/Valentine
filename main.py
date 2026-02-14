@@ -30,7 +30,7 @@ async def celebration(request: Request):
 async def love_letter(request: Request):
     """Love letter page"""
     # Calculate days together (change this date to your actual meeting date)
-    meeting_date = datetime(2024, 2, 14)
+    meeting_date = datetime(2024, 5, 22)
     today = datetime.now()
     days_together = (today - meeting_date).days
     
